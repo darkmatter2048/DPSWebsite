@@ -1,0 +1,17 @@
+---
+// 重定向到homes/startup页面
+Astro.response.status = 301;
+Astro.response.headers.set('Location', '/homes/startup');
+---
+
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0;url=/homes/startup">
+    <script>
+      window.location.href = '/homes/startup';
+    </script>
+  </head>
+  <body>
+    <p>正在重定向到 <a href="/homes/startup">homes/startup</a>...</p>
+  </body>
+</html>

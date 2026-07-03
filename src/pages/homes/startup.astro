@@ -1,0 +1,305 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import Features2 from '~/components/widgets/Features2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Brands from '~/components/widgets/Brands.astro';
+
+import { YouTube } from 'astro-embed';
+
+const metadata = {
+  title: '主页',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    tagline="WindowsCleaner"
+    actions={[
+      {
+        variant: 'primary',
+        target: '_blank',
+        text: '下载',
+        href: 'https://dyblog.online/windowscleaner#%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85',
+        icon: 'tabler:download',
+      },
+      { text: 'GitHub', href: 'https://github.com/darkmatter2048/WindowsCleaner' },
+    ]}
+  >
+    <Fragment slot="title">
+    <span class="text-accent dark:text-white">Windows Cleaner</span
+      >
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="font-semibold">——专治C盘爆红及各种不服！</span>
+    </Fragment>
+    <!--    <Fragment slot="image">
+      <YouTube id="gxBkghlglTg" title="Astro just Launched.... Could it be the ultimate web framework?" />
+      <style is:inline>
+        lite-youtube {
+          margin: 0 auto;
+          max-width: 100%;
+        }
+      </style>
+    </Fragment> -->
+    <Fragment slot="image">
+      <div class="relative w-full max-w-4xl mx-auto aspect-video">
+        <iframe 
+          src="//player.bilibili.com/player.html?isOutside=true&aid=114651752824951&bvid=BV1ogTaznEPr&cid=30400317997&p=1&autoplay=1&high_quality=1&danmaku=0" 
+          class="absolute top-0 left-0 w-full h-full rounded-lg shadow-xl"
+          allowfullscreen
+          sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts">
+        </iframe>
+      </div>
+      <style is:inline>
+        @media (max-width: 768px) {
+          .max-w-4xl {
+            max-width: 90%;
+            margin: 0 auto;
+          }
+        }
+      </style>
+    </Fragment>
+  </Hero>
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    title="我为什么要开发Windows Cleaner？"
+    subtitle="本项目的最初目的是自用。将其开源并不是为了盈利，也不是为了出名。纯粹是希望能够通过我的软件帮助更多的电脑小白免受狗资本家的坑害。希望大家能够理解和支持！"
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Stats Widget ****************** -->
+
+  <Stats
+    title="探索 Windows Cleaner 的惊人影响力"
+    subtitle="以下数据于2025年7月12日更新(数据来源: GitHub)"
+    stats={[
+      { title: '下载次数', amount: '16K' },
+      { title: '星标数量', amount: '1.8K' },
+    ]}
+  />
+
+  <!-- Brands Widget ****************** -->
+  <!--
+  <Brands
+    title="感谢以下优秀人士或企业的支持"
+    subtitle="At Astrowind, we believe in the power of collaboration to drive innovation and create exceptional experiences."
+    icons={[]}
+    images={[
+      {
+        src: 'https://dyblog.online/assets/thanks/logo.png',
+        alt: '乔星欢',
+      },
+      {
+        src: 'https://dyblog.online/assets/thanks/poster-logo.png',
+        alt: 'DevPole',
+      },
+      {
+        src: 'https://ok9static.oktacdn.com/fs/bco/1/fs080lnwlryTYstMp417',
+        alt: 'SignPath',
+      },
+    ]}
+  />
+  -->
+
+  <!-- Features2 Widget ************** -->
+  
+  <Features2
+    title="为什么选择Windows Cleaner?"
+    subtitle="项目特点"
+    items={[
+      {
+        title: '简单易用',
+        description:
+          '友好的用户界面设计，让你轻松上手，即使是电脑小白也能轻松使用。',
+        icon: 'flat-color-icons:document',
+      },
+      {
+        title: '安全可靠',
+        description:
+          '所有操作均经过严格测试，保证安全可靠，不会对系统造成任何损害。.',
+        icon: 'flat-color-icons:template',
+      },
+      {
+        title: '持续更新',
+        description:
+          '我们致力于不断改进和更新 Windows Cleaner，确保它与最新的 Windows 系统完美兼容，为你提供最佳的使用体验。',
+        icon: 'flat-color-icons:voice-presentation',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Features Widget *************** -->
+
+  <Features
+    id="features"
+    title="软件功能及特点"
+    subtitle="Windows Cleaner 是一款功能强大的 Windows 系统清理工具，旨在帮助用户轻松清理系统垃圾、优化性能、释放磁盘空间。以下是它的一些主要功能和特点："
+    columns={3}
+    items={[
+      {
+        title: '系统清理与优化',
+        description:
+          '强劲清理系统垃圾，让您的系统始终保持最佳状态。',
+        icon: 'tabler:artboard',
+      },
+      {
+        title: '隐私保护',
+        description: 'Windows Cleaner100%本地运行，隐私有保障。',
+        icon: 'tabler:picture-in-picture',
+      },
+      {
+        title: '用户体验',
+        description:
+          '无需注册登录即可使用，并且无任何广告。',
+        icon: 'tabler:adjustments-horizontal',
+      },
+      {
+        title: '完全开源免费',
+        description: 'Windows Cleaner 是一款完全开源的免费软件，您可以自由使用和修改它。我们相信开源能够促进软件的创新和发展。',
+        icon: 'tabler:rocket',
+      },
+      {
+        title: '原创深度清理算法',
+        description:
+          'Windows Cleaner 采用原创的深度清理算法，能够深入系统各个角落，彻底清理不必要的文件和数据，释放更多磁盘空间。',
+        icon: 'tabler:device-desktop',
+      },
+      {
+        title: '社区支持',
+        description:
+          '我们有一个活跃的社区，您可以在这里找到帮助、分享经验和获取最新的更新信息。',
+        icon: 'tabler:users',
+      },
+    ]}
+  />
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    title="📢 常见问题以及解答"
+    items={[
+      {
+        title: '为什么一点击深度清理就会闪退？',
+        description:
+          '可能是被杀毒软件误杀了，建议关闭杀毒软件后再试。',
+      },
+      {
+        title: '为啥用了虚拟内存迁移反而多占了我10多个G？ Help!',
+        description:
+          '没有勾选上关闭系统休眠就执行了的话，会把你已经关闭掉了的系统休眠重新恢复。',
+      },
+      {
+        title: '会删除C盘的各种游戏存档路径吗？',
+        description:
+          '不会。',
+      },
+      {
+        title: 'Edge浏览器报毒，无法下载。',
+        description:
+          '选择最新版Windows Cleaner下载',
+      },
+      {
+        title: '图片和压缩包都显示函数不正确,无法打开',
+        description:
+          '控制面板——>应用——>搜索 “照片”——>点击 “高级选项”——>修复, 或者重置。其它应用如果遇到类似的问题(比如无法启动)也可以使用该方法解决',
+      },
+      {
+        title: '联想拯救者win11深度清理完后无法进入系统(5.0.8及以上已修复)',
+        description:
+          "解决部分机型的Windows11深度清理后无法进入系统问题 https://zhuanlan.zhihu.com/p/627071728",
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
+
+  <!-- Features3 Widget ************** -->
+
+  <Features3
+    title="联系我们"
+    subtitle="联系我们，获取更多帮助和支持。"
+    columns={4}
+    items={[
+      {
+        title: 'Issues',
+        icon: 'tabler:bug',
+        callToAction: {
+          target: '_blank',
+          text: 'GitHub Issues',
+          href: 'https://github.com/darkmatter2048/WindowsCleaner/issues',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Email',
+        icon: 'tabler:mail',
+        callToAction: {
+          target: 'darkmatter2048@outlook.com',
+          text: 'darkmatter2048@outlook.com',
+          href: 'mailto:darkmatter2048@outlook.com',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'QQ Group 1',
+        icon: 'tabler:message-circle',
+        callToAction: {
+          target: '_blank',
+          text: 'QQ群1',
+          href: 'http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=Wgxe7QkwqIYfSkIqIP2hnwGHWKMdZY58&authKey=lam7sd2TUpdZ1VLrIR%2FyQzYYGcO3SDaLqDpIfWNw7hSA8Df0ZiyEWT5Wm3RTA6Rx&noverify=0&group_code=868824052',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'QQ Group 2',
+        icon: 'tabler:message-circle',
+        callToAction: {
+          target: '_blank',
+          text: 'QQ群2',
+          href: 'https://qm.qq.com/q/dqyQ3sxSHC',
+          variant: 'link',
+        },
+      },
+    ]}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        target: '_blank',
+        text: '下载',
+        href: 'https://dyblog.online/windowscleaner#%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85',
+        icon: 'tabler:download',
+      },
+    ]}
+  >
+    <Fragment slot="title">立即使用Windows Cleaner</Fragment>
+    <Fragment slot="subtitle">
+      快速解放你的C盘空间
+    </Fragment>
+  </CallToAction>
+</Layout>
