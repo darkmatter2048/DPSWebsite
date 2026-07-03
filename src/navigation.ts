@@ -51,6 +51,7 @@ export const footerData = {
     {
       title: '友链',
       links: [
+        { text: '星之墨辰', href: 'https://space.bilibili.com/501149848?from=dyblog.online' },
         { text: '玄离199', href: 'https://space.bilibili.com/67079745?from=dyblog.online' },
         { text: 'vladelaina', href: 'https://vladelaina.com/' },
         { text: '是玄夜不是玄月', href: 'https://space.bilibili.com/353516833' },
