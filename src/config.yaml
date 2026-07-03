@@ -1,6 +1,6 @@
 site:
-  name: WindowsCleaner
-  site: 'https://wc.dyblog.online'
+  name: DaYe PhotoStudio 3
+  site: 'https://dps.dyblog.online'
   base: '/'
   trailingSlash: false
 
@@ -9,22 +9,22 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: WindowsCleaner
-    template: '%s — WindowsCleaner'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: DaYe PhotoStudio 3
+    template: '%s — DaYe PhotoStudio 3'
+  description: "\U0001F4F7 支持批处理的多功能图像处理工具箱，完全离线运行，无需联网——智能抠图、超分放大、格式转换、PDF 处理等 25 项实用功能。"
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: WindowsCleaner
+    site_name: DaYe PhotoStudio 3
     images:
       - url: '~/assets/images/default.png'
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@onwidget'
-    site: '@onwidget'
+    handle: '@darkmatter2048'
+    site: '@darkmatter2048'
     cardType: summary_large_image
 
 i18n:

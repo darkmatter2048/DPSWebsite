@@ -11,7 +11,8 @@ import Features3 from '~/components/widgets/Features3.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Brands from '~/components/widgets/Brands.astro';
 
-import { YouTube } from 'astro-embed';
+import uiLight from '~/assets/images/ui_light.png';
+import uiDark from '~/assets/images/ui_dark.png';
 
 const metadata = {
   title: '主页',
@@ -22,60 +23,175 @@ const metadata = {
   <!-- Hero Widget ******************* -->
 
   <Hero
-    tagline="WindowsCleaner"
+    tagline="DaYe PhotoStudio 3"
     actions={[
       {
         variant: 'primary',
         target: '_blank',
-        text: '下载',
-        href: 'https://dyblog.online/windowscleaner#%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85',
+        text: '下载 (Windows)',
+        href: '#',
         icon: 'tabler:download',
       },
-      { text: 'GitHub', href: 'https://github.com/darkmatter2048/WindowsCleaner' },
+      { text: 'GitHub', href: 'https://github.com/darkmatter2048' },
     ]}
   >
     <Fragment slot="title">
-    <span class="text-accent dark:text-white">Windows Cleaner</span
+    <span class="text-accent dark:text-white">DaYe PhotoStudio 3</span
       >
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span class="font-semibold">——专治C盘爆红及各种不服！</span>
+      <span class="font-semibold">——支持批处理的多功能图像处理工具箱，完全离线运行，无需联网</span>
     </Fragment>
-    <!--    <Fragment slot="image">
-      <YouTube id="gxBkghlglTg" title="Astro just Launched.... Could it be the ultimate web framework?" />
-      <style is:inline>
-        lite-youtube {
-          margin: 0 auto;
-          max-width: 100%;
-        }
-      </style>
-    </Fragment> -->
     <Fragment slot="image">
-      <div class="relative w-full max-w-4xl mx-auto aspect-video">
-        <iframe 
-          src="//player.bilibili.com/player.html?isOutside=true&aid=114651752824951&bvid=BV1ogTaznEPr&cid=30400317997&p=1&autoplay=1&high_quality=1&danmaku=0" 
-          class="absolute top-0 left-0 w-full h-full rounded-lg shadow-xl"
-          allowfullscreen
-          sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts">
-        </iframe>
+      <div class="carousel-wrapper relative w-full max-w-4xl mx-auto">
+        <div class="carousel-track rounded-lg shadow-xl overflow-hidden" id="carouselTrack">
+          <img src={uiLight.src} alt="DPS3 浅色主题界面" width={uiLight.width} height={uiLight.height} loading="eager" class="carousel-slide" />
+          <img src={uiDark.src} alt="DPS3 深色主题界面" width={uiDark.width} height={uiDark.height} loading="lazy" class="carousel-slide" />
+        </div>
+        <!-- 左右箭头 -->
+        <button id="carouselPrev" class="carousel-arrow carousel-arrow-left" aria-label="上一张">‹</button>
+        <button id="carouselNext" class="carousel-arrow carousel-arrow-right" aria-label="下一张">›</button>
+        <!-- 圆点指示器 -->
+        <div class="carousel-dots" id="carouselDots">
+          <span class="carousel-dot active" data-index="0"></span>
+          <span class="carousel-dot" data-index="1"></span>
+        </div>
       </div>
       <style is:inline>
+        .carousel-wrapper {
+          position: relative;
+        }
+        .carousel-track {
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
+        .carousel-track::-webkit-scrollbar {
+          display: none;
+        }
+        .carousel-slide {
+          flex: 0 0 100%;
+          scroll-snap-align: start;
+          width: 100%;
+          height: auto;
+          object-fit: contain;
+          display: block;
+        }
+        .carousel-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 10;
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 50%;
+          border: none;
+          background: rgba(255,255,255,0.85);
+          color: #333;
+          font-size: 1.5rem;
+          line-height: 1;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+          transition: background 0.2s, transform 0.2s;
+          opacity: 0.7;
+        }
+        .carousel-arrow:hover {
+          background: rgba(255,255,255,1);
+          opacity: 1;
+          transform: translateY(-50%) scale(1.05);
+        }
+        .carousel-arrow-left  { left: 0.75rem; }
+        .carousel-arrow-right { right: 0.75rem; }
+        .carousel-dots {
+          display: flex;
+          justify-content: center;
+          gap: 0.5rem;
+          margin-top: 0.75rem;
+        }
+        .carousel-dot {
+          width: 0.625rem;
+          height: 0.625rem;
+          border-radius: 50%;
+          background: #cbd5e1;
+          cursor: pointer;
+          transition: background 0.2s;
+        }
+        .carousel-dot.active {
+          background: #3b82f6;
+        }
         @media (max-width: 768px) {
-          .max-w-4xl {
-            max-width: 90%;
+          .carousel-wrapper {
+            max-width: 92%;
             margin: 0 auto;
+          }
+          .carousel-arrow {
+            width: 2rem;
+            height: 2rem;
+            font-size: 1.2rem;
           }
         }
       </style>
+      <script is:inline>
+        (function() {
+          const track = document.getElementById('carouselTrack');
+          const prev = document.getElementById('carouselPrev');
+          const next = document.getElementById('carouselNext');
+          const dots = document.querySelectorAll('#carouselDots .carousel-dot');
+          const slides = track.querySelectorAll('.carousel-slide');
+          const total = slides.length;
+          let current = 0;
+          let autoTimer;
+
+          function goTo(index) {
+            current = ((index % total) + total) % total;
+            track.scrollTo({ left: track.clientWidth * current, behavior: 'smooth' });
+            updateDots();
+          }
+
+          function updateDots() {
+            dots.forEach((d, i) => d.classList.toggle('active', i === current));
+          }
+
+          // 通过滚动位置更新当前索引（兼容手动滑动）
+          function onScrollEnd() {
+            const idx = Math.round(track.scrollLeft / track.clientWidth);
+            if (idx !== current) { current = idx; updateDots(); }
+          }
+          let scrollTimer;
+          track.addEventListener('scroll', () => {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(onScrollEnd, 100);
+          });
+
+          prev.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+          next.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+          dots.forEach(d => d.addEventListener('click', () => { goTo(parseInt(d.dataset.index)); resetAuto(); }));
+
+          // 自动播放
+          function autoPlay() { autoTimer = setInterval(() => goTo(current + 1), 5000); }
+          function resetAuto() { clearInterval(autoTimer); autoPlay(); }
+          autoPlay();
+
+          // 触摸/拖拽结束后重置自动播放
+          track.addEventListener('touchend', resetAuto);
+          track.addEventListener('mouseup', resetAuto);
+        })();
+      </script>
     </Fragment>
   </Hero>
 
   <!-- Features2 Widget ************** -->
 
   <Features2
-    title="我为什么要开发Windows Cleaner？"
-    subtitle="本项目的最初目的是自用。将其开源并不是为了盈利，也不是为了出名。纯粹是希望能够通过我的软件帮助更多的电脑小白免受狗资本家的坑害。希望大家能够理解和支持！"
+    title="我为什么要开发 DaYe PhotoStudio 3？"
+    subtitle="在日常工作和创作中，图像处理、视频处理、PDF 转换等需求无处不在。市面上的工具要么收费昂贵，要么需要联网上传隐私数据。DPS3 的初衷就是打造一款完全离线、价格实惠、功能全面的图像处理工具箱，让每个人都能高效处理图片，无需担心隐私泄露。"
   >
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
@@ -85,11 +201,10 @@ const metadata = {
   <!-- Stats Widget ****************** -->
 
   <Stats
-    title="探索 Windows Cleaner 的惊人影响力"
-    subtitle="以下数据于2025年7月12日更新(数据来源: GitHub)"
+    title="DaYe PhotoStudio 3 版本信息"
+    subtitle="当前版本：v0.1.0 | 支持 Windows 平台（后续支持 macOS、Linux）"
     stats={[
-      { title: '下载次数', amount: '16K' },
-      { title: '星标数量', amount: '1.8K' },
+      { title: '功能总数', amount: '25' },
     ]}
   />
 
@@ -117,10 +232,10 @@ const metadata = {
   -->
 
   <!-- Features2 Widget ************** -->
-  
+
   <Features2
-    title="为什么选择Windows Cleaner?"
-    subtitle="项目特点"
+    title="为什么选择 DaYe PhotoStudio 3?"
+    subtitle="产品特点"
     items={[
       {
         title: '简单易用',
@@ -131,13 +246,13 @@ const metadata = {
       {
         title: '安全可靠',
         description:
-          '所有操作均经过严格测试，保证安全可靠，不会对系统造成任何损害。.',
+          '完全离线运行，无需联网。所有处理均在本地完成，你的图片和隐私数据不会上传到任何服务器。',
         icon: 'flat-color-icons:template',
       },
       {
         title: '持续更新',
         description:
-          '我们致力于不断改进和更新 Windows Cleaner，确保它与最新的 Windows 系统完美兼容，为你提供最佳的使用体验。',
+          '我们致力于不断改进和更新 DaYe PhotoStudio 3，后续将支持 macOS 和 Linux 平台，为你提供最佳的使用体验。',
         icon: 'flat-color-icons:voice-presentation',
       },
     ]}
@@ -152,42 +267,224 @@ const metadata = {
   <Features
     id="features"
     title="软件功能及特点"
-    subtitle="Windows Cleaner 是一款功能强大的 Windows 系统清理工具，旨在帮助用户轻松清理系统垃圾、优化性能、释放磁盘空间。以下是它的一些主要功能和特点："
+    subtitle="DaYe PhotoStudio 3 是一款支持批处理的多功能图像处理工具箱，涵盖图像处理、视频处理、PDF 处理三大类别，共计 25 项实用功能。完全离线运行，无需联网，保护你的隐私安全。"
     columns={3}
     items={[
       {
-        title: '系统清理与优化',
+        title: '智能抠图',
         description:
-          '强劲清理系统垃圾，让您的系统始终保持最佳状态。',
-        icon: 'tabler:artboard',
+          'AI 智能识别主体，一键抠图，轻松去除背景。',
+        icon: 'tabler:scissors',
       },
       {
-        title: '隐私保护',
-        description: 'Windows Cleaner100%本地运行，隐私有保障。',
-        icon: 'tabler:picture-in-picture',
+        title: '魔法消除',
+        description: '智能移除图片中不需要的物体、水印或人物，不留痕迹。',
+        icon: 'tabler:wand',
       },
       {
-        title: '用户体验',
+        title: '超分放大',
         description:
-          '无需注册登录即可使用，并且无任何广告。',
-        icon: 'tabler:adjustments-horizontal',
+          'AI 超分辨率技术，无损放大图片，让模糊图片变清晰。',
+        icon: 'tabler:zoom-in',
       },
       {
-        title: '完全开源免费',
-        description: 'Windows Cleaner 是一款完全开源的免费软件，您可以自由使用和修改它。我们相信开源能够促进软件的创新和发展。',
-        icon: 'tabler:rocket',
+        title: '图片压缩',
+        description: '智能压缩图片体积，在保证画质的前提下大幅减小文件大小。',
+        icon: 'tabler:photo-down',
       },
       {
-        title: '原创深度清理算法',
+        title: '格式转换',
         description:
-          'Windows Cleaner 采用原创的深度清理算法，能够深入系统各个角落，彻底清理不必要的文件和数据，释放更多磁盘空间。',
-        icon: 'tabler:device-desktop',
+          '支持 PNG、JPG、WebP、BMP、TIFF 等主流格式互转，批量处理更高效。',
+        icon: 'tabler:arrows-exchange',
       },
       {
-        title: '社区支持',
+        title: '修改尺寸',
         description:
-          '我们有一个活跃的社区，您可以在这里找到帮助、分享经验和获取最新的更新信息。',
-        icon: 'tabler:users',
+          '批量调整图片尺寸，支持按比例、按像素、按百分比等多种方式。',
+        icon: 'tabler:dimensions',
+      },
+      {
+        title: '图像旋转',
+        description: '批量旋转图片，支持任意角度旋转和镜像翻转。',
+        icon: 'tabler:rotate',
+      },
+      {
+        title: '圆角裁剪',
+        description: '将图片裁剪为圆角矩形，支持自定义圆角大小。',
+        icon: 'tabler:square-rounded',
+      },
+      {
+        title: 'GIF 工具',
+        description: 'GIF 合成、分解帧，简易 GIF 处理工具。',
+        icon: 'tabler:gif',
+      },
+      {
+        title: '图片拼接',
+        description:
+          '多张图片横向或纵向拼接，支持自定义间距和背景。',
+        icon: 'tabler:stack-2',
+      },
+      {
+        title: '位图转矢量',
+        description:
+          '将位图转换为 SVG 矢量图，无限放大不失真。',
+        icon: 'tabler:vector',
+      },
+      {
+        title: '批量重命名',
+        description:
+          '批量重命名图片文件，支持自定义命名规则。',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: '文档扫描',
+        description: '拍照即可生成扫描件，自动矫正透视和增强文字清晰度。',
+        icon: 'tabler:scan',
+      },
+      {
+        title: '图片转 Word',
+        description:
+          '将图片中的文字提取并导出为可编辑的 Word 文档。',
+        icon: 'tabler:file-type-doc',
+      },
+      {
+        title: '图片转 Excel',
+        description:
+          '将图片中的表格识别并导出为可编辑的 Excel 文件。',
+        icon: 'tabler:file-type-xls',
+      },
+      {
+        title: '文件快传',
+        description:
+          '局域网内快速传输文件，无需数据线，即传即达。',
+        icon: 'tabler:file-upload',
+      },
+      {
+        title: '视频超分',
+        description:
+          'AI 视频超分辨率，提升视频画质，让低清视频变高清。',
+        icon: 'tabler:video-plus',
+      },
+      {
+        title: '视频导出帧',
+        description:
+          '从视频中提取帧画面，支持按时间间隔或帧率批量导出。',
+        icon: 'tabler:frame',
+      },
+      {
+        title: '图片合成视频',
+        description:
+          '将多张图片合成为视频，支持自定义帧率。',
+        icon: 'tabler:movie',
+      },
+      {
+        title: 'PDF 转图片',
+        description:
+          '将 PDF 每一页转换为高质量图片，支持自定义分辨率。',
+        icon: 'tabler:file-type-pdf',
+      },
+      {
+        title: 'PDF 转 Word',
+        description:
+          '将 PDF 文档转换为可编辑的 Word 文件，保留排版格式。',
+        icon: 'tabler:file-type-doc',
+      },
+      {
+        title: 'PDF 旋转',
+        description:
+          '批量旋转 PDF 页面方向，支持单独页面调整。',
+        icon: 'tabler:rotate-rectangle',
+      },
+      {
+        title: 'PDF 分割',
+        description:
+          '将 PDF 按页码范围分割为多个文件，或提取指定页面。',
+        icon: 'tabler:scissors',
+      },
+      {
+        title: 'PDF 合并',
+        description:
+          '将多个 PDF 文件合并为一个文档，支持自定义排序。',
+        icon: 'tabler:folders',
+      },
+      {
+        title: '图片转 PDF',
+        description:
+          '将多张图片合并转换为一个 PDF 文件，支持页面排版。',
+        icon: 'tabler:file-plus',
+      },
+    ]}
+  />
+
+  <!-- Features Widget: 视频处理单独展示 -->
+  <Features
+    title="视频处理"
+    subtitle="简单实用的视频处理工具，无需安装庞大的专业软件。"
+    columns={3}
+    items={[
+      {
+        title: '视频超分',
+        description:
+          'AI 视频超分辨率技术，智能提升视频画质。支持多种超分模型，让低清视频焕发新生。',
+        icon: 'tabler:video-plus',
+      },
+      {
+        title: '视频导出帧',
+        description:
+          '从视频中按帧率或时间间隔批量导出帧画面，支持 PNG、JPG 等格式，方便后期处理和截图保存。',
+        icon: 'tabler:frame',
+      },
+      {
+        title: '图片合成视频',
+        description:
+          '将多张图片合成为视频，支持自定义帧率，轻松制作幻灯片和延时摄影。',
+        icon: 'tabler:movie',
+      },
+    ]}
+  />
+
+  <!-- Features Widget: PDF 处理单独展示 -->
+  <Features
+    title="PDF 处理"
+    subtitle="全面的 PDF 处理工具集，一站式解决 PDF 编辑转换需求。"
+    columns={3}
+    items={[
+      {
+        title: 'PDF 转图片',
+        description:
+          '将 PDF 每一页转换为高质量图片，支持自定义 DPI 和输出格式。',
+        icon: 'tabler:file-type-pdf',
+      },
+      {
+        title: 'PDF 转 Word',
+        description:
+          '将 PDF 文档精确转换为可编辑的 Word 文档，保留原有排版和格式。',
+        icon: 'tabler:file-type-doc',
+      },
+      {
+        title: 'PDF 旋转',
+        description:
+          '灵活调整 PDF 页面方向，支持 90°、180°、270° 旋转和单独页面调整。',
+        icon: 'tabler:rotate-rectangle',
+      },
+      {
+        title: 'PDF 分割',
+        description:
+          '按页码范围拆分 PDF，提取指定页面或每页独立保存。',
+        icon: 'tabler:scissors',
+      },
+      {
+        title: 'PDF 合并',
+        description:
+          '将多个 PDF 文件合并为一个，支持拖拽排序和页面范围选择。',
+        icon: 'tabler:folders',
+      },
+      {
+        title: '图片转 PDF',
+        description:
+          '将单张或多张图片合并转换成一个 PDF 文件，支持页面尺寸和方向设置。',
+        icon: 'tabler:file-plus',
       },
     ]}
   />
@@ -198,34 +495,34 @@ const metadata = {
     title="📢 常见问题以及解答"
     items={[
       {
-        title: '为什么一点击深度清理就会闪退？',
+        title: 'DaYe PhotoStudio 3 是免费的吗？',
         description:
-          '可能是被杀毒软件误杀了，建议关闭杀毒软件后再试。',
+          '限时免费！现在下载即可永久免费使用DaYe PhotoStudio 3 的全部功能！即将恢复原价，如有需要敬请抓紧时间下载。',
       },
       {
-        title: '为啥用了虚拟内存迁移反而多占了我10多个G？ Help!',
+        title: 'DPS3 需要联网使用吗？',
         description:
-          '没有勾选上关闭系统休眠就执行了的话，会把你已经关闭掉了的系统休眠重新恢复。',
+          '不需要。DPS3 完全离线运行，所有图像处理、AI 推理均在本地完成，不会上传任何数据到服务器，充分保护你的隐私。',
       },
       {
-        title: '会删除C盘的各种游戏存档路径吗？',
+        title: 'DPS3 支持哪些操作系统？',
         description:
-          '不会。',
+          '当前版本 (v0.1.0) 支持 Windows 平台。后续版本将陆续支持 macOS 和 Linux 系统，敬请期待。',
       },
       {
-        title: 'Edge浏览器报毒，无法下载。',
+        title: '软件提示“发生未知错误”，该如何解决？',
         description:
-          '选择最新版Windows Cleaner下载',
+          '等待软件右上角的后端指示灯变为绿色后再重试。软件及部分功能首次启动耗时较长属正常现象，请耐心等待。',
       },
       {
-        title: '图片和压缩包都显示函数不正确,无法打开',
+        title: '遇到 Bug 该如何反馈？',
         description:
-          '控制面板——>应用——>搜索 “照片”——>点击 “高级选项”——>修复, 或者重置。其它应用如果遇到类似的问题(比如无法启动)也可以使用该方法解决',
+          '可以通过QQ/TG 群、或发送邮件到 darkmatter2048@outlook.com 向我们反馈，我们会尽快修复。',
       },
       {
-        title: '联想拯救者win11深度清理完后无法进入系统(5.0.8及以上已修复)',
+        title: 'DPS3 会开源吗？',
         description:
-          "解决部分机型的Windows11深度清理后无法进入系统问题 https://zhuanlan.zhihu.com/p/627071728",
+          'DPS3 目前是闭源软件，暂无开源计划。不过作者的个人 GitHub 主页 (github.com/darkmatter2048) 上有其他开源项目，欢迎关注。',
       },
     ]}
   >
@@ -247,7 +544,7 @@ const metadata = {
         callToAction: {
           target: '_blank',
           text: 'GitHub Issues',
-          href: 'https://github.com/darkmatter2048/WindowsCleaner/issues',
+          href: 'https://github.com/darkmatter2048/DPS3/issues',
           variant: 'link',
         },
       },
@@ -258,6 +555,16 @@ const metadata = {
           target: 'darkmatter2048@outlook.com',
           text: 'darkmatter2048@outlook.com',
           href: 'mailto:darkmatter2048@outlook.com',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Telegram',
+        icon: 'tabler:message-circle',
+        callToAction: {
+          target: '_blank',
+          text: 'Telegram讨论区',
+          href: 'https://t.me/+kRK2MIVK5d80MTA1',
           variant: 'link',
         },
       },
@@ -291,15 +598,15 @@ const metadata = {
       {
         variant: 'primary',
         target: '_blank',
-        text: '下载',
-        href: 'https://dyblog.online/windowscleaner#%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85',
+        text: '下载 (Windows)',
+        href: '#',
         icon: 'tabler:download',
       },
     ]}
   >
-    <Fragment slot="title">立即使用Windows Cleaner</Fragment>
+    <Fragment slot="title">立即使用 DaYe PhotoStudio 3</Fragment>
     <Fragment slot="subtitle">
-      快速解放你的C盘空间
+      支持批处理的图像处理工具箱，完全离线，即装即用
     </Fragment>
   </CallToAction>
 </Layout>

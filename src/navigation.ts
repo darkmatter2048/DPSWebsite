@@ -3,8 +3,8 @@ import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 export const headerData = {
   links: [
     {
-      text: '社区',
-      href: 'https://github.com/darkmatter2048/WindowsCleaner/discussions',
+      text: '功能',
+      href: '/homes/startup#features',
     },
     {
       text: '捐赠',
@@ -19,7 +19,7 @@ export const headerData = {
       href: getBlogPermalink(),
     },
   ],
-  actions: [{ text: '下载', href: 'https://dyblog.online/windowscleaner#%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85', target: '_blank' }],
+  actions: [{ text: '下载', href: 'https://pan.quark.cn/s/af35d67635e5', target: '_blank' }],
 };
 
 export const footerData = {
@@ -29,7 +29,7 @@ export const footerData = {
       links: [
         { text: 'Bilibili', href: 'https://space.bilibili.com/1847808902?spm_id_from=333.1007.0.0' },
         { text: 'DaYe博客', href: 'https://dyblog.online/' },
-        { text: 'GitHub', href: 'https://github.com/darkmatter2048' },
+        { text: 'Telegram', href: 'https://t.me/+kRK2MIVK5d80MTA1' },
         { text: 'QQ群1', href: 'http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=Wgxe7QkwqIYfSkIqIP2hnwGHWKMdZY58&authKey=lam7sd2TUpdZ1VLrIR%2FyQzYYGcO3SDaLqDpIfWNw7hSA8Df0ZiyEWT5Wm3RTA6Rx&noverify=0&group_code=868824052' },
         { text: 'QQ群2', href: 'https://qm.qq.com/q/dqyQ3sxSHC' },
       ],
@@ -37,11 +37,8 @@ export const footerData = {
     {
       title: '关于软件',
       links: [
-        { text: 'GitHub', href: 'https://github.com/darkmatter2048/WindowsCleaner' },
-        { text: 'License', href: 'https://github.com/darkmatter2048/WindowsCleaner/blob/main/LICENSE' },
         { text: '隐私政策', href: '/privacy' },
         { text: '捐赠', href: 'https://dyblog.online/donate' },
-        { text: '反馈Bug', href: 'https://github.com/darkmatter2048/WindowsCleaner/issues' },
       ],
     },
     {
@@ -49,9 +46,6 @@ export const footerData = {
       links: [
         { text: '乔星欢', href: 'https://www.qiaoxh.com/?from=dyblog.online' },
         { text: 'DevPole', href: 'https://www.devpole.com/?from=dyblog.online' },
-        { text: 'SignPath代码签名', href: 'https://signpath.io/' },
-        { text: 'GitHub', href: 'https://github.com/darkmatter2048/WindowsCleaner' },
-        { text: 'PyQt', href: 'https://www.qt.io/' },
       ],
     },
     {
@@ -60,9 +54,6 @@ export const footerData = {
         { text: '玄离199', href: 'https://space.bilibili.com/67079745?from=dyblog.online' },
         { text: 'vladelaina', href: 'https://vladelaina.com/' },
         { text: '是玄夜不是玄月', href: 'https://space.bilibili.com/353516833' },
-        { text: '1orid9ont', href: 'https://space.bilibili.com/9140335' },
-        { text: '西北风轨迹', href: 'https://space.bilibili.com/470947807' },
-        { text:'空无痕黑月', href: 'https://space.bilibili.com/23092030'},
       ],
     },
   ],
