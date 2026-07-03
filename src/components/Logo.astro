@@ -1,9 +1,11 @@
 ---
 import { SITE } from 'astrowind:config';
+import logoImage from '~/assets/favicons/apple-touch-icon.png';
 ---
 
 <span
-  class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white"
+  class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white flex items-center gap-2"
 >
-  🚀 {SITE?.name}
+  <img src={logoImage.src} alt="DPS3 Logo" width="28" height="28" class="w-7 h-7 md:w-7 md:h-7 rounded-sm" />
+  {SITE?.name}
 </span>
